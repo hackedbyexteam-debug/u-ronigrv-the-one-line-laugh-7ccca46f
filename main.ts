@@ -25,5 +25,12 @@ import { mkdirSync, writeFileSync } from "node:fs";
 
 const ENTRY = `My bank app congratulated me on saving money this month, which is easy when your card gets declined before you can spend any.`;
 
+const MAX_CHARS = 200; // competition cap
+if (ENTRY.length > MAX_CHARS) {
+  console.error(`entry is ${ENTRY.length} chars, over the ${MAX_CHARS} cap`);
+  process.exit(1);
+}
+
 mkdirSync("/output", { recursive: true });
 writeFileSync("/output/entry.txt", ENTRY, "utf8");
+console.log(`wrote /output/entry.txt (${ENTRY.length} chars)`);
